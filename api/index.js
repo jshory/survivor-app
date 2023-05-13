@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const cors = require("cors");
+
 require("dotenv").config();
 
 const mongoose = require("mongoose");
@@ -24,6 +26,8 @@ database.once("connected", () => {
 
 app.use(express.json());
 
+app.use(cors());
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -40,7 +44,7 @@ app.use((req, res, next) => {
 // Load API routes
 app.use("/seasons", seasons);
 app.use("/contestants", contestants);
-// app.use("/tribes", tribes);
+app.use("/tribes", tribes);
 
 app.listen(process.env.PORT, () =>
   console.log(`Listening on port ${process.env.PORT}`)

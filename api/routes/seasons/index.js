@@ -8,6 +8,11 @@ router.get("/", async (req, res) => {
   try {
     const results = await Season.find()
       .populate("contestants")
+      .populate({
+        path: "tribes",
+        model: "Tribe",
+        populate: { path: "contestants", model: "Contestant" },
+      })
       .sort({ createdAt: "desc" });
     return res.send(results);
   } catch (err) {
