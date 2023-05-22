@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         model: "Tribe",
         populate: { path: "contestants", model: "Contestant" },
       })
+      .populate("rules")
       .sort({ createdAt: "desc" });
     return res.send(results);
   } catch (err) {

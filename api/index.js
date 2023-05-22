@@ -11,6 +11,7 @@ mongoose.set("strictQuery", false);
 const seasons = require("./routes/seasons");
 const contestants = require("./routes/contestants");
 const tribes = require("./routes/tribes");
+const rules = require("./routes/rules");
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_STRING);
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 app.use("/seasons", seasons);
 app.use("/contestants", contestants);
 app.use("/tribes", tribes);
+app.use("/rules", rules);
 
 app.listen(process.env.PORT, () =>
   console.log(`Listening on port ${process.env.PORT}`)

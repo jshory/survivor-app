@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
   },
   contestants: [{ type: Schema.Types.ObjectId, ref: "Contestant" }],
   tribes: [{ type: Schema.Types.ObjectId, ref: "Tribe" }],
+  rules: [{ type: Schema.Types.ObjectId, ref: "Rule" }],
 });
 
 schema.set("timestamps", true);
