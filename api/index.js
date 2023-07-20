@@ -1,29 +1,11 @@
 const express = require("express");
 const app = express();
 
-const cors = require("cors");
-
 require("dotenv").config();
 
-const mongoose = require("mongoose");
-mongoose.set("strictQuery", false);
+const cors = require("cors");
 
-const seasons = require("./routes/seasons");
-const contestants = require("./routes/contestants");
-const tribes = require("./routes/tribes");
-const rules = require("./routes/rules");
-
-// Connect to DB
-mongoose.connect(process.env.MONGO_STRING);
-const database = mongoose.connection;
-
-database.on("error", (error) => {
-  console.log(error);
-});
-
-database.once("connected", () => {
-  console.log("Database Connected");
-});
+const routes = require("./routes");
 
 app.use(express.json());
 
@@ -43,10 +25,7 @@ app.use((req, res, next) => {
 });
 
 // Load API routes
-app.use("/seasons", seasons);
-app.use("/contestants", contestants);
-app.use("/tribes", tribes);
-app.use("/rules", rules);
+app.use("/", routes);
 
 app.listen(process.env.PORT, () =>
   console.log(`Listening on port ${process.env.PORT}`)
