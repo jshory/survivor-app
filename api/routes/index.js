@@ -162,8 +162,7 @@ router.get("/scores", async (req, res) => {
     // Return array of weekly scores, sorted by name
     return res.send(_.sortBy(scoreSheets, "name"));
   } catch (err) {
-    const errStatus = err.status || 400;
-    res.status(errStatus).json({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 });
 
